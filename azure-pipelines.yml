@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- none
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -23,10 +23,6 @@ steps:
 - script: |
     npm pack
   displayName: 'Package for npm release'
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
 - task: CopyFiles@2
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
@@ -40,6 +36,11 @@ steps:
     contents: 'package.json' 
     targetFolder: $(Build.ArtifactStagingDirectory)/npm
   displayName: 'Copy package.json'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
 
 - task: PublishBuildArtifacts@1
   inputs:
