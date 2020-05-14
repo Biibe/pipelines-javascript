@@ -23,7 +23,10 @@ steps:
 - script: |
     npm pack
   displayName: 'Package for npm release'
-
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
 - task: CopyFiles@2
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
