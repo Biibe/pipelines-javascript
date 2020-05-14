@@ -44,6 +44,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
-    publishLocation: 'Container'
+    pathtoPublish: '$(System.DefaultWorkingDirectory)/npm'
+    artifactName: npm
   displayName: 'Publish npm artifact'
